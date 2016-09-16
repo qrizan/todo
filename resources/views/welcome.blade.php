@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Laravel - VueJS</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
         <style type="text/css">
@@ -17,16 +17,12 @@
         <div class="container" id="vue-app">
 
               <div class="row">
-                <div class="col-sm-6">
-                  <h1>My Todos</h1>
+                <div class="col-md-6 col-md-offset-3">
+                  <h1>Todos App</h1>
                   <todo-items :todos.sync="todos"></todo-items>
                   
                   <todo-add-form :newtodo.sync="newTodo"></todo-add-form>
                 </div>
-
-                <div class="col-sm-6">
-                  <h1>My Todos</h1>
-                </div>                
               </div>
             
         </div>

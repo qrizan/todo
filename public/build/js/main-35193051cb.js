@@ -12104,7 +12104,7 @@ exports.default = {
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<form v-on:submit.prevent=\"addNewTodo()\">\n\t<div class=\"form-group\">\n\t\t<input type=\"text\" class=\"form-control\" placeholder=\"Add new Todo\" v-model=\"todo.title\"> \n\t</div>\n\n\t<div class=\"form-group\">\n\t\t<button class=\"btn btn-success\">Add</button>\n\t</div>\n</form>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<form v-on:submit.prevent=\"addNewTodo()\">\n\t<div class=\"form-group\">\n\t\t<input type=\"text\" class=\"form-control\" placeholder=\"Add new Todo\" v-model=\"todo.title\"> \n\t</div>\n\n\t<div class=\"form-group\">\n\t\t<button class=\"btn btn-primary btn-block\">Add</button>\n\t</div>\n</form>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -12127,10 +12127,26 @@ exports.default = {
 
 	methods: {
 		todoDelete: function todoDelete(todo) {
-			this.todos.$remove(todo);
+			var _this = this;
+
+			var postData = { id: todo.id };
+			this.$http.post('api/v1/todo-delete', postData).then(function (response) {
+				if (response.status == 200) {
+					_this.todos.$remove(todo);
+				}
+			}).catch(function (response) {
+				console.log('Error', response);
+			});
 		},
 		todoCompleted: function todoCompleted(todo) {
-			todo.completed = !todo.completed;
+			var postData = { id: todo.id };
+			this.$http.post('api/v1/todo-status', postData).then(function (response) {
+				if (response.status == 200) {
+					todo.completed = !todo.completed;
+				}
+			}).catch(function (response) {
+				console.log('Error', response);
+			});
 		}
 	}
 };

@@ -5,11 +5,25 @@
 
 		methods: {
 			todoDelete(todo){
-				this.todos.$remove(todo)
+				var postData = {id: todo.id};
+				this.$http.post('api/v1/todo-delete', postData).then((response) => {
+					if (response.status == 200){
+						this.todos.$remove(todo)
+					}
+				}).catch((response) => {
+					console.log('Error', response);
+				});
 			},
 
 			todoCompleted(todo){
-				todo.completed = !todo.completed
+				var postData = {id: todo.id};
+				this.$http.post('api/v1/todo-status', postData).then((response) => {
+					if (response.status == 200){
+						todo.completed = !todo.completed
+					}
+				}).catch((response) => {
+					console.log('Error', response);
+				});				
 			}  	
 		}	
 	}

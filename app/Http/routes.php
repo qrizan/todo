@@ -21,4 +21,6 @@ Route::group(['prefix' => 'api/v1/'], function(){
 	});
 
 	Route::post('todo', 'Api\TodoApiController@saveTodo');
+	Route::post('todo-delete','Api\TodoApiController@deleteTodo');
+	Route::post('todo-status','Api\TodoApiController@statusTodo');
 });

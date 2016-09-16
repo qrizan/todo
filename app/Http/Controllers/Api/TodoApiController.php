@@ -28,4 +28,28 @@ class TodoApiController extends Controller
 		return response($todo, 201);
 
 	}
+
+	public function deleteTodo(Request $request)
+	{
+		$id = $request->input('id');
+		$todo = Todo::where('id',$id)->first();
+		$todo->delete();
+
+		return response($todo, 200);
+	}	
+
+	public function statusTodo(Request $request)
+	{
+		$id = $request->input('id');
+		$todo = Todo::where('id',$id)->first();
+		if($todo->completed == true){
+			$todo->completed = false;
+		}else{
+			$todo->completed = true;
+		}
+
+		$todo->save();
+
+		return response($todo, 200);
+	}		
 }

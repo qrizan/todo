@@ -32,7 +32,7 @@
 		</div>
 
 		<div class="form-group">
-			<button class="btn btn-success">Add</button>
+			<button class="btn btn-primary btn-block">Add</button>
 		</div>
 	</form>
 </template>
